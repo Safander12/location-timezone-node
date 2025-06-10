@@ -1,30 +1,32 @@
-import {
-  countryIso2Codes,
-  countryIso3Codes,
-} from './data';
+import { countryIso2Codes, countryIso3Codes } from './data';
 
 /**
- * @func exists Whether the specified value is not null, undefined or NaN.
+ * Checks if the specified value is not null, undefined, or NaN.
  *
- * @param  {any} thing
- * @return {boolean}
+ * @param thing The value to check.
+ * @returns True if the value exists, false otherwise.
  */
-export const exists = function exists(thing: any): boolean {
-  return !(thing === undefined || thing === null || Number.isNaN(thing));
+export const exists = function exists(thing: unknown): boolean {
+  return !(
+    thing === undefined ||
+    thing === null ||
+    (typeof thing === 'number' && Number.isNaN(thing))
+  );
 };
 
 /**
- * @func is Whether the specified value is from the specified type regarding its whole prototype.
+ * Checks if the specified value is of the given type (constructor or prototype).
  *
- * @param  {function} Type Type function
- * @param  {any} thing
- * @return {boolean}
+ * @param Type The constructor function to check against.
+ * @param thing The value to check.
+ * @returns True if the value is of the given type, false otherwise.
  */
-export const is = function is(Type: Function, thing: any): boolean {
-  return exists(Type)
-  && exists(thing)
-  && (thing.constructor === Type
-  || thing instanceof Type);
+export const is = function is<T>(Type: new (...args: any[]) => T, thing: unknown): thing is T {
+  return (
+    exists(Type) &&
+    exists(thing) &&
+    ((thing as object).constructor === Type || thing instanceof Type)
+  );
 };
 
 /**
@@ -35,9 +37,15 @@ export const is = function is(Type: Function, thing: any): boolean {
  * @param  {number}  to   Minimum 1
  * @return {boolean}
  */
-export const hasLen = function hasLen(
-  { str, from, to }: { str: string; from: number; to: number; },
-): boolean {
+export const hasLen = function hasLen({
+  str,
+  from,
+  to,
+}: {
+  str: string;
+  from: number;
+  to: number;
+}): boolean {
   if (!is(String, str)) {
     return false;
   }
@@ -94,9 +102,11 @@ export const match = function match({
  * @param  {string}  code  ISO code (case sensitive)
  * @return {object}
  */
-export const isValidCountryIso = function isValidCountryIso(
-  code: string,
-): { valid: boolean; iso2: boolean; iso3: boolean; } {
+export const isValidCountryIso = function isValidCountryIso(code: string): {
+  valid: boolean;
+  iso2: boolean;
+  iso3: boolean;
+} {
   const res = {
     valid: false,
     iso2: false,

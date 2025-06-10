@@ -19,7 +19,7 @@ of location-timezone-node, please report it with the
 
 ## Supported Versions
 
-The latest *stable* major version is currently supported by the team.
+The latest _stable_ major version is currently supported by the team.
 For example, if the latest release is 1.6.y, then the 1.x.y versions are supported.
 
 The latest stable release unilaterally receives all fixes from `master`,

@@ -17,8 +17,8 @@ export const findStateAnsiByFipsCode = function findStateAnsiByFipsCode(
     return undefined;
   }
 
-  return statesAnsi.find(
-    (state) => match({
+  return statesAnsi.find((state) =>
+    match({
       source: state.fipsCode,
       compare: code,
       partial: false,
@@ -42,8 +42,8 @@ export const findStateAnsiByGnisid = function findStateAnsiByGnisid(
     return undefined;
   }
 
-  return statesAnsi.find(
-    (state) => match({
+  return statesAnsi.find((state) =>
+    match({
       source: state.gnisid,
       compare: id,
       partial: false,
@@ -66,8 +66,8 @@ export const findStateAnsiByName = function findStateAnsiByName(
     return undefined;
   }
 
-  return statesAnsi.find(
-    (state) => match({
+  return statesAnsi.find((state) =>
+    match({
       source: state.name,
       compare: name,
       partial: false,
@@ -91,8 +91,8 @@ export const findStateAnsiByUspsCode = function findStateAnsiByUspsCode(
     return undefined;
   }
 
-  return statesAnsi.find(
-    (state) => match({
+  return statesAnsi.find((state) =>
+    match({
       source: state.uspsCode,
       compare: code,
       partial: false,

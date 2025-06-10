@@ -8,13 +8,13 @@ Your responsibility is to report vulnerabilities to us using the guidelines outl
 
 To report a security issue please do the following:
 
-* Email [myjagdish@yahoo.com](mailto:myjagdish@yahoo.com);
-* Include the word "SECURITY" in the subject line;
-* Give your name and affiliation (if any);
-* Include scope of vulnerability by letting us know who could use this exploit;
-* Document steps to identify the vulnerability so we can reproduce your findings;
-* Show how to exploit vulnerability, give us an attack scenario.
+- Email [myjagdish@yahoo.com](mailto:myjagdish@yahoo.com);
+- Include the word "SECURITY" in the subject line;
+- Give your name and affiliation (if any);
+- Include scope of vulnerability by letting us know who could use this exploit;
+- Document steps to identify the vulnerability so we can reproduce your findings;
+- Show how to exploit vulnerability, give us an attack scenario.
 
 The location-timezone-node team will send a response indicating the next steps in handling your report. After the initial reply to your report, the security team will keep you informed of the progress towards a fix and full announcement, and may ask for additional information or guidance.
 
-Report security bugs in third-party modules to the person or team maintaining the module. You can also report a vulnerability through the [npm contact form](https://www.npmjs.com/support) by selecting *I'm reporting a security vulnerability*.
+Report security bugs in third-party modules to the person or team maintaining the module. You can also report a vulnerability through the [npm contact form](https://www.npmjs.com/support) by selecting _I'm reporting a security vulnerability_.

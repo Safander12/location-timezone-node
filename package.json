@@ -13,7 +13,8 @@
     "build:files": "node docs/clean-and-generate.js",
     "build": "tsc -p tsconfig.json",
     "lint": "eslint src/*.ts",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
   },
   "repository": {
     "type": "git",

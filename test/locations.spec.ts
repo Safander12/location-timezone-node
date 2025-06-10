@@ -3,7 +3,11 @@ import Joi from 'joi';
 
 const locationSchema = Joi.object({
   city: Joi.string().allow('').min(2).required(),
-  cityAscii: Joi.string().allow('').regex(/^[\x00-\x7F]+$/).min(2).required(),
+  cityAscii: Joi.string()
+    .allow('')
+    .regex(/^[\x00-\x7F]+$/)
+    .min(2)
+    .required(),
   latitude: Joi.number().required(),
   longitude: Joi.number().required(),
   province: Joi.string().allow('').min(2).required(),
@@ -24,25 +28,33 @@ describe('findLocationsByCoordinates', () => {
   });
 
   it('should not return the empty array when at least one parameter for each boundary is provided', () => {
-    expect(locationTimezone.findLocationsByCoordinates({
-      latitudeFrom: 0,
-      longitudeFrom: 0,
-    }).length).toBeGreaterThan(0);
+    expect(
+      locationTimezone.findLocationsByCoordinates({
+        latitudeFrom: 0,
+        longitudeFrom: 0,
+      }).length,
+    ).toBeGreaterThan(0);
 
-    expect(locationTimezone.findLocationsByCoordinates({
-      latitudeFrom: 0,
-      longitudeTo: 0,
-    }).length).toBeGreaterThan(0);
+    expect(
+      locationTimezone.findLocationsByCoordinates({
+        latitudeFrom: 0,
+        longitudeTo: 0,
+      }).length,
+    ).toBeGreaterThan(0);
 
-    expect(locationTimezone.findLocationsByCoordinates({
-      latitudeTo: 0,
-      longitudeFrom: 0,
-    }).length).toBeGreaterThan(0);
+    expect(
+      locationTimezone.findLocationsByCoordinates({
+        latitudeTo: 0,
+        longitudeFrom: 0,
+      }).length,
+    ).toBeGreaterThan(0);
 
-    expect(locationTimezone.findLocationsByCoordinates({
-      latitudeTo: 0,
-      longitudeTo: 0,
-    }).length).toBeGreaterThan(0);
+    expect(
+      locationTimezone.findLocationsByCoordinates({
+        latitudeTo: 0,
+        longitudeTo: 0,
+      }).length,
+    ).toBeGreaterThan(0);
   });
 
   it('should return correct locations within the provided coordinates range', () => {
@@ -142,7 +154,9 @@ describe('findLocationsByCountryName', () => {
   });
 
   it('should return locations with official name', () => {
-    const locations = locationTimezone.findLocationsByCountryName('The Democratic Republic of Timor-Leste');
+    const locations = locationTimezone.findLocationsByCountryName(
+      'The Democratic Republic of Timor-Leste',
+    );
 
     expect(locations).not.toBeUndefined();
     expect(locations).toEqual(expect.any(Array));
@@ -156,7 +170,9 @@ describe('findLocationsByCountryName', () => {
 
   it('should ignore case', () => {
     const locations1 = locationTimezone.findLocationsByCountryName('timor-leste');
-    const locations2 = locationTimezone.findLocationsByCountryName('the Democratic Republic of Timor-Leste');
+    const locations2 = locationTimezone.findLocationsByCountryName(
+      'the Democratic Republic of Timor-Leste',
+    );
 
     expect(locations1).not.toBeUndefined();
     expect(locations1).toEqual(expect.any(Array));

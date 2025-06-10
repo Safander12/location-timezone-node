@@ -663,10 +663,10 @@ NOTE:
 - At least one of each latitude/longitude boundary value is necessary.
 
 - `coordinates` **<Object\>**
-  - `latitudeFrom?` **<Number\>** *Default*: `Number.NEGATIVE_INFINITY`.
-  - `latitudeTo?` **<Number\>** *Default*: `Number.POSITIVE_INFINITY`.
-  - `longitudeFrom?` **<Number\>** *Default*: `Number.NEGATIVE_INFINITY`.
-  - `longitudeTo?` **<Number\>** *Default*: `Number.POSITIVE_INFINITY`.
+  - `latitudeFrom?` **<Number\>** _Default_: `Number.NEGATIVE_INFINITY`.
+  - `latitudeTo?` **<Number\>** _Default_: `Number.POSITIVE_INFINITY`.
+  - `longitudeFrom?` **<Number\>** _Default_: `Number.NEGATIVE_INFINITY`.
+  - `longitudeTo?` **<Number\>** _Default_: `Number.POSITIVE_INFINITY`.
 - Returns: **<Location[]\>** Sorted by city name ascendant.
 
 Examples:
@@ -842,7 +842,7 @@ locationTimezone.findLocationsByCountryIso(''); // []
 Find locations based on a country name.
 
 - `name` **<String\>** Country name (case insensitive).
-- `partialMatch` **<Boolean\>** Whether to include partial matches. *Default*: `false`
+- `partialMatch` **<Boolean\>** Whether to include partial matches. _Default_: `false`
 - Returns: **<Location[]\>** Sorted by city name ascendant.
 
 Examples:
@@ -920,7 +920,7 @@ locationTimezone.findLocationsByCountryName(''); // []
 Find locations based on a province (not recommended, unreliable data).
 
 - `name` **<String\>** Province name (case insensitive).
-- `partialMatch` **<Boolean\>** Whether to include partial matches. *Default*: `false`
+- `partialMatch` **<Boolean\>** Whether to include partial matches. _Default_: `false`
 - Returns: **<Location[]\>** Sorted by city name ascendant.
 
 Examples:
@@ -974,7 +974,7 @@ locationTimezone.findLocationsByProvince(''); // []
 Find locations based on the state name.
 
 - `name` **<String\>** State name (case insensitive, official United States Postal Service (USPS) code for the US).
-- `partialMatch` **<Boolean\>** Whether to include partial matches. *Default*: `false`
+- `partialMatch` **<Boolean\>** Whether to include partial matches. _Default_: `false`
 - Returns: **<Location[]\>** Sorted by city name ascendant.
 
 Examples:

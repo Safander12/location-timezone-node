@@ -45,22 +45,30 @@ describe('findTimezoneByCapitalOfCountryName', () => {
   });
 
   it('should return a timezone with short name', () => {
-    const timezone = locationTimezone.findTimezoneByCapitalOfCountryName('British Indian Ocean Territory');
+    const timezone = locationTimezone.findTimezoneByCapitalOfCountryName(
+      'British Indian Ocean Territory',
+    );
 
     expect(timezone).not.toBeUndefined();
     expect(timezone).toBe('Indian/Chagos');
   });
 
   it('should return a timezone with official name', () => {
-    const timezone = locationTimezone.findTimezoneByCapitalOfCountryName('The British Indian Ocean Territory');
+    const timezone = locationTimezone.findTimezoneByCapitalOfCountryName(
+      'The British Indian Ocean Territory',
+    );
 
     expect(timezone).not.toBeUndefined();
     expect(timezone).toBe('Indian/Chagos');
   });
 
   it('should return ignore case', () => {
-    const timezone1 = locationTimezone.findTimezoneByCapitalOfCountryName('thE british Indian Ocean territory');
-    const timezone2 = locationTimezone.findTimezoneByCapitalOfCountryName('british indian ocean territory');
+    const timezone1 = locationTimezone.findTimezoneByCapitalOfCountryName(
+      'thE british Indian Ocean territory',
+    );
+    const timezone2 = locationTimezone.findTimezoneByCapitalOfCountryName(
+      'british indian ocean territory',
+    );
 
     expect(timezone1).not.toBeUndefined();
     expect(timezone1).toBe('Indian/Chagos');
@@ -110,7 +118,32 @@ describe('findTimezonesByCountryIso', () => {
     const timezones = locationTimezone.findTimezonesByCountryIso('CAN');
 
     expect(timezones).not.toBeUndefined();
-    expect(timezones).toEqual(['America/Blanc-Sablon', 'America/Cambridge_Bay', 'America/Coral_Harbour', 'America/Creston', 'America/Dawson', 'America/Dawson_Creek', 'America/Detroit', 'America/Edmonton', 'America/Fort_Nelson', 'America/Glace_Bay', 'America/Goose_Bay', 'America/Halifax', 'America/Inuvik', 'America/Iqaluit', 'America/Moncton', 'America/Nipigon', 'America/Panama', 'America/Pangnirtung', 'America/Rankin_Inlet', 'America/Regina', 'America/Resolute', 'America/St_Johns', 'America/Thunder_Bay', 'America/Toronto', 'America/Vancouver', 'America/Whitehorse', 'America/Winnipeg', 'America/Yellowknife']);
+    expect(timezones).toEqual([
+      'America/Blanc-Sablon',
+      'America/Cambridge_Bay',
+      'America/Coral_Harbour',
+      'America/Creston',
+      'America/Dawson',
+      'America/Dawson_Creek',
+      'America/Detroit',
+      'America/Edmonton',
+      'America/Fort_Nelson',
+      'America/Glace_Bay',
+      'America/Goose_Bay',
+      'America/Halifax',
+      'America/Inuvik',
+      'America/Iqaluit',
+      'America/Moncton',
+      'America/Panama',
+      'America/Rankin_Inlet',
+      'America/Regina',
+      'America/Resolute',
+      'America/St_Johns',
+      'America/Toronto',
+      'America/Vancouver',
+      'America/Whitehorse',
+      'America/Winnipeg',
+    ]);
   });
 
   it('should ignore case', () => {
@@ -138,15 +171,21 @@ describe('findTimezonesByCountryName', () => {
   });
 
   it('should return timezones with official name', () => {
-    const timezones = locationTimezone.findTimezonesByCountryName('The Territory of Cocos (Keeling) Islands');
+    const timezones = locationTimezone.findTimezonesByCountryName(
+      'The Territory of Cocos (Keeling) Islands',
+    );
 
     expect(timezones).not.toBeUndefined();
     expect(timezones).toEqual(['Indian/Cocos']);
   });
 
   it('should ignore case', () => {
-    const timezones1 = locationTimezone.findTimezonesByCountryName('Democratic Republic of the Congo');
-    const timezones2 = locationTimezone.findTimezonesByCountryName('The Democratic Republic of the Congo');
+    const timezones1 = locationTimezone.findTimezonesByCountryName(
+      'Democratic Republic of the Congo',
+    );
+    const timezones2 = locationTimezone.findTimezonesByCountryName(
+      'The Democratic Republic of the Congo',
+    );
 
     expect(timezones1).not.toBeUndefined();
     expect(timezones1).toEqual(['Africa/Kinshasa', 'Africa/Lubumbashi']);
@@ -160,6 +199,8 @@ describe('getTimezones', () => {
   it('should return all the timezones', () => {
     const timezones = locationTimezone.getTimezones();
     expect(timezones).not.toBeUndefined();
-    expect(Joi.array().items(Joi.string().min(2).required()).required().validate(timezones).error).toBeUndefined();
+    expect(
+      Joi.array().items(Joi.string().min(2).required()).required().validate(timezones).error,
+    ).toBeUndefined();
   });
 });

@@ -1,10 +1,5 @@
 import { locations } from './data';
-import {
-  exists,
-  is,
-  isValidCountryIso,
-  match,
-} from './helpers';
+import { exists, is, isValidCountryIso, match } from './helpers';
 import { Location } from './interfaces';
 
 /**
@@ -33,15 +28,20 @@ export const findLocationsByCoordinates = function findLocationsByCoordinates({
   const longTo = is(Number, longitudeTo) ? longitudeTo : Number.POSITIVE_INFINITY;
 
   // at least one of each value is necessary
-  if ((!exists(latitudeFrom) && !exists(latitudeTo))
-    || (!exists(longitudeFrom) && !exists(longitudeTo))) {
+  if (
+    (!exists(latitudeFrom) && !exists(latitudeTo)) ||
+    (!exists(longitudeFrom) && !exists(longitudeTo))
+  ) {
     return [];
   }
 
-  const res = locations.filter((location) => (location.latitude >= latFrom
-    && location.latitude <= latTo
-    && location.longitude >= longFrom
-    && location.longitude <= longTo));
+  const res = locations.filter(
+    (location) =>
+      location.latitude >= latFrom &&
+      location.latitude <= latTo &&
+      location.longitude >= longFrom &&
+      location.longitude <= longTo,
+  );
 
   return res;
 };
@@ -68,8 +68,8 @@ export const findLocationsByCountryIso = function findLocationsByCountryIso(
   }
 
   const alphaType = iso2 ? 'iso2' : 'iso3';
-  const res = locations.filter(
-    (location) => match({
+  const res = locations.filter((location) =>
+    match({
       source: location.country[alphaType],
       compare: countryCode,
       partial: false,
@@ -97,17 +97,19 @@ export const findLocationsByCountryName = function findLocationsByCountryName(
 
   const partial = partialMatch === true;
   const res = locations.filter(
-    (location) => match({
-      partial,
-      source: location.country.name,
-      compare: name,
-      strict: false,
-    }) || match({
-      partial,
-      source: location.country.officialName,
-      compare: name,
-      strict: false,
-    }),
+    (location) =>
+      match({
+        partial,
+        source: location.country.name,
+        compare: name,
+        strict: false,
+      }) ||
+      match({
+        partial,
+        source: location.country.officialName,
+        compare: name,
+        strict: false,
+      }),
   );
 
   return res;
@@ -130,8 +132,8 @@ export const findLocationsByProvince = function findLocationsByProvince(
   }
 
   const partial = partialMatch === true;
-  const res = locations.filter(
-    (location) => match({
+  const res = locations.filter((location) =>
+    match({
       partial,
       source: location.province,
       compare: name,
@@ -158,8 +160,8 @@ export const findLocationsByState = function findLocationsByState(
   }
 
   const partial = partialMatch === true;
-  const res = locations.filter(
-    (location) => match({
+  const res = locations.filter((location) =>
+    match({
       partial,
       source: location.state,
       compare: name,

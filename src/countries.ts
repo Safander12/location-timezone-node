@@ -6,15 +6,8 @@ import {
   countryIso3ByIso2Codes,
   countryIso3Codes,
 } from './data';
-import {
-  is,
-  isValidCountryIso,
-  match,
-} from './helpers';
-import {
-  Capital,
-  Country,
-} from './interfaces';
+import { is, isValidCountryIso, match } from './helpers';
+import { Capital, Country } from './interfaces';
 
 /**
  * @func findCapitalOfCountryIso Find the capital of a country by its
@@ -39,8 +32,8 @@ export const findCapitalOfCountryIso = function findCapitalOfCountryIso(
 
   const alphaType = iso2 ? 'iso2' : 'iso3';
 
-  return countryCapitals.find(
-    (capital) => match({
+  return countryCapitals.find((capital) =>
+    match({
       source: capital.country[alphaType],
       compare: code,
       partial: false,
@@ -63,17 +56,19 @@ export const findCapitalOfCountryName = function findCapitalOfCountryName(
   }
 
   return countryCapitals.find(
-    (capital) => match({
-      source: capital.country.name,
-      compare: name,
-      partial: false,
-      strict: false,
-    }) || match({
-      source: capital.country.officialName,
-      compare: name,
-      partial: false,
-      strict: false,
-    }),
+    (capital) =>
+      match({
+        source: capital.country.name,
+        compare: name,
+        partial: false,
+        strict: false,
+      }) ||
+      match({
+        source: capital.country.officialName,
+        compare: name,
+        partial: false,
+        strict: false,
+      }),
   );
 };
 
@@ -91,17 +86,19 @@ export const findCountryByCapitalName = function findCountryByCapitalName(
   }
 
   return countries.find(
-    (country) => match({
-      source: country.capital.name,
-      compare: name,
-      partial: false,
-      strict: false,
-    }) || match({
-      source: country.capital.nameAscii,
-      compare: name,
-      partial: false,
-      strict: false,
-    }),
+    (country) =>
+      match({
+        source: country.capital.name,
+        compare: name,
+        partial: false,
+        strict: false,
+      }) ||
+      match({
+        source: country.capital.nameAscii,
+        compare: name,
+        partial: false,
+        strict: false,
+      }),
   );
 };
 
@@ -111,9 +108,7 @@ export const findCountryByCapitalName = function findCountryByCapitalName(
  * @param  {string}  code  Country ISO code (case insensitive)
  * @return {Country|undefined}
  */
-export const findCountryByIso = function findCountryByIso(
-  code: string,
-): Country | undefined {
+export const findCountryByIso = function findCountryByIso(code: string): Country | undefined {
   if (!is(String, code)) {
     return undefined;
   }
@@ -127,8 +122,8 @@ export const findCountryByIso = function findCountryByIso(
 
   const alphaType = iso2 ? 'iso2' : 'iso3';
 
-  return countries.find(
-    (country) => match({
+  return countries.find((country) =>
+    match({
       source: country[alphaType],
       compare: code,
       partial: false,
@@ -143,25 +138,25 @@ export const findCountryByIso = function findCountryByIso(
  * @param  {string}  name  Country name (case insensitive)
  * @return {Country|undefined}
  */
-export const findCountryByName = function findCountryByName(
-  name: string,
-): Country | undefined {
+export const findCountryByName = function findCountryByName(name: string): Country | undefined {
   if (!is(String, name)) {
     return undefined;
   }
 
   return countries.find(
-    (country) => match({
-      source: country.name,
-      compare: name,
-      partial: false,
-      strict: false,
-    }) || match({
-      source: country.officialName,
-      compare: name,
-      partial: false,
-      strict: false,
-    }),
+    (country) =>
+      match({
+        source: country.name,
+        compare: name,
+        partial: false,
+        strict: false,
+      }) ||
+      match({
+        source: country.officialName,
+        compare: name,
+        partial: false,
+        strict: false,
+      }),
   );
 };
 

@@ -20,9 +20,9 @@ Unfortunately, we are not able to investigate / fix bugs without a minimal repro
 
 ## <a name="feature"></a> Feature Requests?
 
-You can *request* a new feature by creating an issue on GitHub.
+You can _request_ a new feature by creating an issue on GitHub.
 
-If you would like to *implement* a new feature, please submit an issue with a proposal for your work **first**, to be sure that particular feature makes sense for the project.
+If you would like to _implement_ a new feature, please submit an issue with a proposal for your work **first**, to be sure that particular feature makes sense for the project.
 
 Once the issue submitted, always start your feature from creating a new branch from `develop` and not `master` as we may have some features still not ready to be merged to `master` yet.
 

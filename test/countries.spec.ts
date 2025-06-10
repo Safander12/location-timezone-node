@@ -3,7 +3,11 @@ import Joi from 'joi';
 
 const capitalSchema = Joi.object({
   name: Joi.string().allow('').min(2).required(),
-  nameAscii: Joi.string().allow('').regex(/^[\x00-\x7F]+$/).min(2).required(),
+  nameAscii: Joi.string()
+    .allow('')
+    .regex(/^[\x00-\x7F]+$/)
+    .min(2)
+    .required(),
   latitude: Joi.number().required(),
   longitude: Joi.number().required(),
   province: Joi.string().allow('').min(2).required(),
@@ -26,7 +30,11 @@ const countrySchema = Joi.object({
   timezones: Joi.array().items(Joi.string().required()).empty(Joi.array().length(0)).required(),
   capital: Joi.object({
     name: Joi.string().allow('').min(2).required(),
-    nameAscii: Joi.string().allow('').regex(/^[\x00-\x7F]+$/).min(2).required(),
+    nameAscii: Joi.string()
+      .allow('')
+      .regex(/^[\x00-\x7F]+$/)
+      .min(2)
+      .required(),
     latitude: Joi.number().required(),
     longitude: Joi.number().required(),
     province: Joi.string().allow('').min(2).required(),
@@ -106,7 +114,9 @@ describe('findCapitalOfCountryName', () => {
   });
 
   it('should return ignore case', () => {
-    const capital1 = locationTimezone.findCapitalOfCountryName('thE british Indian Ocean territory');
+    const capital1 = locationTimezone.findCapitalOfCountryName(
+      'thE british Indian Ocean territory',
+    );
     const capital2 = locationTimezone.findCapitalOfCountryName('british indian ocean territory');
 
     expect(capital1).not.toBeUndefined();
@@ -119,7 +129,9 @@ describe('findCapitalOfCountryName', () => {
   });
 
   it('should return an empty capital if the country does not have one', () => {
-    const capital = locationTimezone.findCapitalOfCountryName('The Territory of Heard Island and McDonald Islands');
+    const capital = locationTimezone.findCapitalOfCountryName(
+      'The Territory of Heard Island and McDonald Islands',
+    );
 
     expect(capital).not.toBeUndefined();
     expect(capital?.name).toBe('');
@@ -254,7 +266,9 @@ describe('getCountryIso2Codes', () => {
   it('should return all the iso2 codes', () => {
     const codes = locationTimezone.getCountryIso2Codes();
     expect(codes).not.toBeUndefined();
-    expect(Joi.array().items(Joi.string().min(2).max(2).required()).required().validate(codes).error).toBeUndefined();
+    expect(
+      Joi.array().items(Joi.string().min(2).max(2).required()).required().validate(codes).error,
+    ).toBeUndefined();
   });
 });
 
@@ -272,7 +286,9 @@ describe('getCountryIso3Codes', () => {
   it('should return all the iso3 codes', () => {
     const codes = locationTimezone.getCountryIso3Codes();
     expect(codes).not.toBeUndefined();
-    expect(Joi.array().items(Joi.string().min(3).max(3).required()).required().validate(codes).error).toBeUndefined();
+    expect(
+      Joi.array().items(Joi.string().min(3).max(3).required()).required().validate(codes).error,
+    ).toBeUndefined();
   });
 });
 

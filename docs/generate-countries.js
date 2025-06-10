@@ -1,7 +1,9 @@
 // From the United Nations: https://unterm.un.org/unterm2/en/country
 // and the World Factbook: https://www.cia.gov/the-world-factbook/
 const { readFileSync, writeFileSync } = require('fs');
-const { object: { exists } } = require('consis');
+const {
+  object: { exists },
+} = require('consis');
 
 const missingCountries = {
   'Åland Islands': 'Åland',
@@ -32,7 +34,7 @@ const missingCountries = {
   Greenland: 'Kalaallit Nunaat',
   Guadeloupe: 'Guadeloupe',
   Guam: 'The Territory of Guam',
-  'Guernsey': 'The Bailiwick of Guernsey',
+  Guernsey: 'The Bailiwick of Guernsey',
   'Heard Island and McDonald Islands': 'The Territory of Heard Island and McDonald Islands',
   'Hong Kong': 'The Hong Kong Special Administrative Region of China',
   'Isle of Man': 'The Isle of Man',
@@ -63,7 +65,8 @@ const missingCountries = {
   Tokelau: 'Tokelau',
   'Tristan da Cunha': 'Saint Helena, Ascension and Tristan da Cunha',
   'Turks and Caicos Islands': 'The Turks and Caicos Islands',
-  'U.S. Minor Outlying Islands': 'Baker Island, Howland Island, Jarvis Island, Johnston Atoll, Kingman Reef, Midway Atoll, Navassa Island, Palmyra Atoll, and Wake Island',
+  'U.S. Minor Outlying Islands':
+    'Baker Island, Howland Island, Jarvis Island, Johnston Atoll, Kingman Reef, Midway Atoll, Navassa Island, Palmyra Atoll, and Wake Island',
   'U.S. Virgin Islands': 'The Virgin Islands of the United States',
   'Wallis and Futuna': 'The Territory of the Wallis and Futuna Islands',
   'Western Sahara': 'The Sahrawi Arab Democratic Republic',
@@ -74,26 +77,26 @@ module.exports = () => {
   const countryFormalNamesByCountryName = {};
   let nbCountries = 0;
 
-  countriesCsv.split('\n').splice(1).forEach((line) => {
-    const [countryShort, countryFormal] = line.replace(/\r/g, '').split(';');
+  countriesCsv
+    .split('\n')
+    .splice(1)
+    .forEach((line) => {
+      const [countryShort, countryFormal] = line.replace(/\r/g, '').split(';');
 
-    if (exists(countryShort) && exists(countryFormal)) {
-      countryFormalNamesByCountryName[countryShort] = countryFormal;
-      nbCountries += 1;
-    }
-  });
+      if (exists(countryShort) && exists(countryFormal)) {
+        countryFormalNamesByCountryName[countryShort] = countryFormal;
+        nbCountries += 1;
+      }
+    });
 
   nbCountries += Object.keys(missingCountries).length;
 
   const updated = {
     ...missingCountries,
-    ...countryFormalNamesByCountryName
+    ...countryFormalNamesByCountryName,
   };
 
-  writeFileSync(
-    `${__dirname}/country-formal-names-by-country-name.js`,
-    JSON.stringify(updated),
-  );
+  writeFileSync(`${__dirname}/country-formal-names-by-country-name.js`, JSON.stringify(updated));
 
   console.log(`✅ Successfully generated ${nbCountries} countries from the official data`);
 

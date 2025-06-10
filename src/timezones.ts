@@ -1,15 +1,5 @@
-import {
-  countries,
-  countryCapitals,
-  locations,
-  timezones,
-} from './data';
-import {
-  exists,
-  is,
-  isValidCountryIso,
-  match,
-} from './helpers';
+import { countries, countryCapitals, locations, timezones } from './data';
+import { exists, is, isValidCountryIso, match } from './helpers';
 
 /**
  * @func findTimezoneByCapitalOfCountryIso Find a timezone based on the capital
@@ -33,8 +23,8 @@ export const findTimezoneByCapitalOfCountryIso = function findTimezoneByCapitalO
   }
 
   const alphaType = iso2 ? 'iso2' : 'iso3';
-  return countryCapitals.find(
-    (capital) => match({
+  return countryCapitals.find((capital) =>
+    match({
       source: capital.country[alphaType],
       compare: countryCode,
       partial: false,
@@ -58,17 +48,19 @@ export const findTimezoneByCapitalOfCountryName = function findTimezoneByCapital
   }
 
   return countryCapitals.find(
-    (capital) => match({
-      source: capital.country.name,
-      compare: name,
-      partial: false,
-      strict: false,
-    }) || match({
-      source: capital.country.officialName,
-      compare: name,
-      partial: false,
-      strict: false,
-    }),
+    (capital) =>
+      match({
+        source: capital.country.name,
+        compare: name,
+        partial: false,
+        strict: false,
+      }) ||
+      match({
+        source: capital.country.officialName,
+        compare: name,
+        partial: false,
+        strict: false,
+      }),
   )?.timezone;
 };
 
@@ -86,17 +78,19 @@ export const findTimezoneByCityName = function findTimezoneByCityName(
   }
 
   return locations.find(
-    (location) => match({
-      source: location.city,
-      compare: name,
-      partial: false,
-      strict: false,
-    }) || match({
-      source: location.cityAscii,
-      compare: name,
-      partial: false,
-      strict: false,
-    }),
+    (location) =>
+      match({
+        source: location.city,
+        compare: name,
+        partial: false,
+        strict: false,
+      }) ||
+      match({
+        source: location.cityAscii,
+        compare: name,
+        partial: false,
+        strict: false,
+      }),
   )?.timezone;
 };
 
@@ -123,8 +117,8 @@ export const findTimezonesByCountryIso = function findTimezonesByCountryIso(
 
   const alphaType = iso2 ? 'iso2' : 'iso3';
 
-  const country = countries.find(
-    (c) => match({
+  const country = countries.find((c) =>
+    match({
       source: c[alphaType],
       compare: code,
       partial: false,
@@ -153,17 +147,19 @@ export const findTimezonesByCountryName = function findTimezonesByCountryName(
   }
 
   const country = countries.find(
-    (c) => match({
-      source: c.name,
-      compare: name,
-      partial: false,
-      strict: false,
-    }) || match({
-      source: c.officialName,
-      compare: name,
-      partial: false,
-      strict: false,
-    }),
+    (c) =>
+      match({
+        source: c.name,
+        compare: name,
+        partial: false,
+        strict: false,
+      }) ||
+      match({
+        source: c.officialName,
+        compare: name,
+        partial: false,
+        strict: false,
+      }),
   );
 
   if (!exists(country)) {
